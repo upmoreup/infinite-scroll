@@ -1,0 +1,141 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "---------------------------build---------------------------": {},
+    "@sgh/styles#build": {},
+    "@sgh/utils#build": {},
+    "@sgh/ui-fo#build": {
+      "dependsOn": ["@sgh/styles#build"],
+      "outputs": ["dist/**"]
+    },
+    "@sgh/ui-bo#build": {
+      "dependsOn": ["@sgh/styles#build"],
+      "outputs": ["dist/**"]
+    },
+    "build:local": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/ui-bo#build", "@sgh/utils#build"],
+      "outputs": ["dist/**"]
+    },
+    "build:dev": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/ui-bo#build", "@sgh/utils#build"],
+      "outputs": ["dist/**"]
+    },
+    "build:prod": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/ui-bo#build", "@sgh/utils#build"],
+      "outputs": ["dist/**"]
+    },
+    "clean": {},
+    "clean:build": {},
+    "---------------------------develop:local---------------------------": {},
+    "local": {
+      "cache": false,
+      "persistent": false
+    },
+    "ep-fe-admin#local": {
+      "dependsOn": ["@sgh/ui-bo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-gea#local": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-tlm#local": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-hrm#local": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "local:admin": {
+      "dependsOn": ["ep-fe-admin#local"]
+    },
+    "local:gea": {
+      "dependsOn": ["ep-fe-gea#local"]
+    },
+    "local:tlm": {
+      "dependsOn": ["ep-fe-tlm#local"]
+    },
+    "local:hrm": {
+      "dependsOn": ["ep-fe-hrm#local"]
+    },
+    "---------------------------develop:gea---------------------------": {},
+    "gea": {
+      "cache": false,
+      "persistent": false
+    },
+    "ep-fe-admin#gea": {
+      "dependsOn": ["@sgh/ui-bo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-gea#gea": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "gea:bo": {
+      "dependsOn": ["ep-fe-admin#gea"]
+    },
+    "gea:fo": {
+      "dependsOn": ["ep-fe-gea#gea"]
+    },
+    "---------------------------develop:dev---------------------------": {},
+    "dev": {
+      "cache": false,
+      "persistent": false
+    },
+    "ep-fe-admin#dev": {
+      "dependsOn": ["@sgh/ui-bo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-gea#dev": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-tlm#dev": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "ep-fe-hrm#dev": {
+      "dependsOn": ["@sgh/ui-fo#build", "@sgh/utils#build"],
+      "outputs": []
+    },
+    "dev:admin": {
+      "dependsOn": ["ep-fe-admin#dev"]
+    },
+    "dev:gea": {
+      "dependsOn": ["ep-fe-gea#dev"]
+    },
+    "dev:tlm": {
+      "dependsOn": ["ep-fe-tlm#dev"]
+    },
+    "dev:hrm": {
+      "dependsOn": ["ep-fe-hrmm#dev"]
+    },
+    "---------------------------test---------------------------": {},
+    "test": {},
+    "---------------------------tools---------------------------": {},
+    "lint": {
+      "cache": false,
+      "outputs": []
+    },
+    "lint:fix": {
+      "cache": false,
+      "outputs": []
+    },
+    "format:check": {
+      "cache": false,
+      "outputs": []
+    },
+    "format:write": {
+      "cache": false,
+      "outputs": []
+    },
+    "typecheck": {},
+    "check:all": {
+      "dependsOn": ["typecheck", "lint", "format:check"]
+    },
+    "fix:all": {
+      "dependsOn": ["typecheck", "lint:fix", "format:write"]
+    }
+  }
+}
