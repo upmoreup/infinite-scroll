@@ -11,6 +11,6 @@ export interface PaginationResponse<T> {
 
 // 무한 스크롤 매개변수 인터페이스
 export interface PaginationParams {
-  page: number;
+  page?: number;
   size: number;
 }
